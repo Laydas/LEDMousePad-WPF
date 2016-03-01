@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -27,6 +28,7 @@ namespace WpfApplication1
         byte red, green, blue;
         double redMax, greenMax, blueMax;
         int counter;
+        byte bowRed, bowBlue, bowGreen;
 
         public MainWindow()
         {
@@ -47,6 +49,10 @@ namespace WpfApplication1
             textValRed.Text = Convert.ToString(red);
             textValGreen.Text = Convert.ToString(green);
             textValBlue.Text = Convert.ToString(blue);
+            comboBox.SelectedIndex = 0;
+            sliderRed.Value = redMax;
+            sliderGreen.Value = greenMax;
+            sliderBlue.Value = blueMax;
         }
 
         private void ComboBoxItem_Selected(object sender, RoutedEventArgs e)
@@ -62,23 +68,32 @@ namespace WpfApplication1
             
             if(fromcbx == "Breathing")
             {
+                OpenColor();
                 InitializeTimer();
                 rectOuter.Visibility = Visibility.Visible;
                 rectInner.Visibility = Visibility.Visible;
+                slider.Visibility = Visibility.Visible;
+                labelSpeed.Visibility = Visibility.Visible;
             }
             else if(fromcbx == "Rainbow")
             {
-                StopTimer();
-                rectOuter.Visibility = Visibility.Hidden;
-                rectInner.Visibility = Visibility.Hidden;
+                CloseColor();
+                InitializeTimer();
+                slider.Visibility = Visibility.Visible;
+                labelSpeed.Visibility = Visibility.Visible;
+                bowRed = 255;
+                bowGreen = 0;
+                bowBlue = 0;
             }
             else if(fromcbx == "Solid")
             {
                 StopTimer();
+                OpenColor();
                 counter = 100;
-                rectOuter.Visibility = Visibility.Visible;
-                rectInner.Visibility = Visibility.Visible;
-                rectColor.Fill = solidBrush;
+                slider.Visibility = Visibility.Hidden;
+                labelSpeed.Visibility = Visibility.Hidden;
+                updateBrush.Color = solidBrush.Color;
+                rectColor.Fill = updateBrush;
             }
         }
 
@@ -87,50 +102,153 @@ namespace WpfApplication1
             Timer1.Interval = TimeSpan.FromMilliseconds(slider.Value);
         }
 
-        private void textBox_TextChanged(object sender, TextChangedEventArgs e)
+        private void textValRed_TextChanged(object sender, TextChangedEventArgs e)
         {
-
+            int redVal = Convert.ToInt32(textValRed.Text);
+            if(redVal > 255)
+            {
+                textValRed.Text = "255";
+            }
+            red = Convert.ToByte(textValRed.Text);
+            solidBrush.Color = Color.FromRgb(red, green, blue);
         }
 
-        bool goingUp = true;
+        private void textValGreen_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(Convert.ToInt32(textValGreen.Text) > 255)
+            {
+                textValGreen.Text = "255";
+            }
+            green = Convert.ToByte(textValGreen.Text);
+            solidBrush.Color = Color.FromRgb(red, green, blue);
+        }
+
+        private void textValBlue_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            if(Convert.ToInt32(textValBlue.Text) > 255)
+            {
+                textValBlue.Text = "255";
+            }
+            blue = Convert.ToByte(textValBlue.Text);
+            solidBrush.Color = Color.FromRgb(red, green, blue);
+        }
+
         private void InitializeTimer()
         {
             Timer1.Start();
         }
 
-        
+        private void button_Click(object sender, RoutedEventArgs e)
+        {
+            redMax = Convert.ToDouble(textValRed.Text);
+            greenMax = Convert.ToDouble(textValGreen.Text);
+            blueMax = Convert.ToDouble(textValBlue.Text);
+            counter = 100;
+            updateBrush.Color = solidBrush.Color;
+        }
+
+        bool goingUp = true;
+
         private void Timer1_Tick(object sender, EventArgs e)
         {
-            if (goingUp)
+            if (comboBox.SelectedIndex == 1)
             {
-                counter++;
-                if(counter > 100)
+                if (goingUp)
                 {
-                    counter = 99;
-                    goingUp = false;
+                    counter++;
+                    if (counter > 100)
+                    {
+                        counter = 99;
+                        goingUp = false;
+                    }
                 }
-            }
-            else
-            {
-                counter--;
-                if (counter < 0)
+                else
                 {
-                    counter = 1;
-                    goingUp = true;
+                    counter--;
+                    if (counter < 0)
+                    {
+                        counter = 1;
+                        goingUp = true;
+                    }
                 }
+                byte red = Convert.ToByte(counter * (redMax / 100));
+                byte green = Convert.ToByte(counter * (greenMax / 100));
+                byte blue = Convert.ToByte(counter * (blueMax / 100));
+                updateBrush.Color = Color.FromRgb(red, green, blue);
+                rectColor.Fill = updateBrush;
             }
-            byte red = Convert.ToByte(counter * (redMax / 100));
-            byte green = Convert.ToByte(counter * (greenMax / 100));
-            byte blue = Convert.ToByte(counter * (blueMax / 100));
-            updateBrush.Color = Color.FromRgb(red, green, blue);
-            rectColor.Fill = updateBrush;
 
-            //labelTest.Content = DateTime.Now.ToLongTimeString();
+            else if (comboBox.SelectedIndex == 2)
+            {
+
+                if (bowRed == 255 && bowGreen < 255 && bowBlue == 0)
+                {
+                    bowGreen = (byte)(bowGreen + 5);
+                }
+                else if(bowRed > 0 && bowGreen == 255)
+                {
+                    bowRed = (byte)(bowRed - 5);
+                }
+                else if(bowGreen == 255 && bowBlue < 255)
+                {
+                    bowBlue = (byte)(bowBlue + 5);
+                }
+                else if(bowGreen > 0 && bowBlue == 255)
+                {
+                    bowGreen = (byte)(bowGreen - 5);
+                }
+                else if(bowBlue == 255 && bowRed < 255)
+                {
+                    bowRed = (byte)(bowRed + 5);
+                }
+                else if(bowRed == 255 && bowBlue > 0)
+                {
+                    bowBlue = (byte)(bowBlue - 5);
+                }
+                updateBrush.Color = Color.FromRgb(bowRed, bowGreen, bowBlue);
+                rectColor.Fill = updateBrush;
+            }
         }
 
         private void StopTimer()
         {
             Timer1.Stop();
+            rectColor.Fill = solidBrush;
+        }
+        private void NumberValidation(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[0-9]+");
+            e.Handled = !regex.IsMatch(e.Text);
+        }
+        private void CloseColor()
+        {
+            rectOuter.Visibility = Visibility.Hidden;
+            rectInner.Visibility = Visibility.Hidden;
+            buttonUpdate.Visibility = Visibility.Hidden;
+            rectRed.Visibility = Visibility.Hidden;
+            rectGreen.Visibility = Visibility.Hidden;
+            rectBlue.Visibility = Visibility.Hidden;
+            textValRed.Visibility = Visibility.Hidden;
+            textValGreen.Visibility = Visibility.Hidden;
+            textValBlue.Visibility = Visibility.Hidden;
+            sliderRed.Visibility = Visibility.Hidden;
+            sliderGreen.Visibility = Visibility.Hidden;
+            sliderBlue.Visibility = Visibility.Hidden;
+        }
+        private void OpenColor()
+        {
+            rectOuter.Visibility = Visibility.Visible;
+            rectInner.Visibility = Visibility.Visible;
+            buttonUpdate.Visibility = Visibility.Visible;
+            rectRed.Visibility = Visibility.Visible;
+            rectGreen.Visibility = Visibility.Visible;
+            rectBlue.Visibility = Visibility.Visible;
+            textValRed.Visibility = Visibility.Visible;
+            textValGreen.Visibility = Visibility.Visible;
+            textValBlue.Visibility = Visibility.Visible;
+            sliderRed.Visibility = Visibility.Visible;
+            sliderGreen.Visibility = Visibility.Visible;
+            sliderBlue.Visibility = Visibility.Visible;
         }
     }
 }

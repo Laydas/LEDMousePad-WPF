@@ -19,16 +19,19 @@
         <Label x:Name="label1" Content="Color Representation" HorizontalAlignment="Left" Margin="721,297,0,0" VerticalAlignment="Top"/>
         <Rectangle x:Name="rectColor" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="735,347,0,0" Stroke="Black" VerticalAlignment="Top" Width="100" StrokeThickness="0"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="125,114,0,0" VerticalAlignment="Top" Width="252" Maximum="100" Minimum="1" SmallChange="1" LargeChange="0" ValueChanged="slider_ValueChanged"/>
-        <Label x:Name="label2" Content="Speed" HorizontalAlignment="Left" Margin="228,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.072,0.342"/>
+        <Label x:Name="labelSpeed" Content="Speed" HorizontalAlignment="Left" Margin="228,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.072,0.342"/>
         <Rectangle x:Name="rectOuter" Fill="Black" HorizontalAlignment="Left" Height="336" Margin="75,175,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="361" />
         <Rectangle x:Name="rectInner" HorizontalAlignment="Left" Height="306" Margin="90,190,0,0" StrokeThickness="0" VerticalAlignment="Top" Width="331" Fill="White" />
-        <Rectangle Fill="#7FFF0000" HorizontalAlignment="Left" Height="45" Margin="97,263,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
-        <Rectangle Fill="#7F00FF00" HorizontalAlignment="Left" Height="45" Margin="97,313,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
-        <Rectangle Fill="#7F0000FF" HorizontalAlignment="Left" Height="45" Margin="97,363,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
-        <Button x:Name="button" Content="UPDATE" HorizontalAlignment="Left" Margin="191,429,0,0" VerticalAlignment="Top" Width="125" Height="54"/>
-        <TextBox x:Name="textValRed" HorizontalAlignment="Left" Height="23" Margin="108,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextChanged="textBox_TextChanged"/>
-        <TextBox x:Name="textValGreen" HorizontalAlignment="Left" Height="23" Margin="108,323,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54"/>
-        <TextBox x:Name="textValBlue" HorizontalAlignment="Left" Height="23" Margin="108,374,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54"/>
+        <Rectangle x:Name="rectRed" Fill="#7FFF0000" HorizontalAlignment="Left" Height="45" Margin="97,263,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
+        <Rectangle x:Name="rectGreen" Fill="#7F00FF00" HorizontalAlignment="Left" Height="45" Margin="97,313,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
+        <Rectangle x:Name="rectBlue" Fill="#7F0000FF" HorizontalAlignment="Left" Height="45" Margin="97,363,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="315"/>
+        <Button x:Name="buttonUpdate" Content="UPDATE" HorizontalAlignment="Left" Margin="191,429,0,0" VerticalAlignment="Top" Width="125" Height="54" Click="button_Click"/>
+        <TextBox x:Name="textValRed" HorizontalAlignment="Left" Height="23" Margin="108,275,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextChanged="textValRed_TextChanged" PreviewTextInput="NumberValidation"/>
+        <TextBox x:Name="textValGreen" HorizontalAlignment="Left" Height="23" Margin="108,323,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextChanged="textValGreen_TextChanged" PreviewTextInput="NumberValidation"/>
+        <TextBox x:Name="textValBlue" HorizontalAlignment="Left" Height="23" Margin="108,374,0,0" TextWrapping="Wrap" Text="0" VerticalAlignment="Top" Width="54" TextChanged="textValBlue_TextChanged" PreviewTextInput="NumberValidation"/>
+        <Slider x:Name="sliderRed" HorizontalAlignment="Left" Margin="177,275,0,0" VerticalAlignment="Top" Height="23" Width="221" Maximum="255" SmallChange="1" LargeChange="0" Value="{Binding ElementName=textValRed, Path=Text}" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="sliderGreen" HorizontalAlignment="Left" Margin="177,323,0,0" VerticalAlignment="Top" Height="23" Width="221" Maximum="255" SmallChange="1" LargeChange="0" Value="{Binding ElementName=textValGreen, Path=Text}" IsSnapToTickEnabled="True"/>
+        <Slider x:Name="sliderBlue" HorizontalAlignment="Left" Margin="177,374,0,0" VerticalAlignment="Top" Height="23" Width="221" Maximum="255" SmallChange="1" LargeChange="0" Value="{Binding ElementName=textValBlue, Path=Text}" IsSnapToTickEnabled="True"/>
 
     </Grid>
 </Window>
