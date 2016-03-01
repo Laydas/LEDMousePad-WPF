@@ -32,6 +32,7 @@ namespace WpfApplication1
 
         public MainWindow()
         {
+            CreateBrushes();
             InitializeComponent();
             Timer1.Interval = TimeSpan.FromMilliseconds(5);
             Timer1.Tick += new EventHandler(Timer1_Tick);
@@ -145,6 +146,8 @@ namespace WpfApplication1
             blueMax = Convert.ToDouble(textValBlue.Text);
             counter = 100;
             updateBrush.Color = solidBrush.Color;
+            topBrushColor.Color = Color.FromRgb(red, green, blue);
+            rectTop.Fill = topBrush;
         }
 
         bool goingUp = true;
@@ -249,6 +252,45 @@ namespace WpfApplication1
             sliderRed.Visibility = Visibility.Visible;
             sliderGreen.Visibility = Visibility.Visible;
             sliderBlue.Visibility = Visibility.Visible;
+        }
+
+
+        LinearGradientBrush topBrush = new LinearGradientBrush();
+        GradientStop topBrushColor = new GradientStop();
+        GradientStop topBrushBlack = new GradientStop();
+        LinearGradientBrush leftBrush = new LinearGradientBrush();
+        GradientStop leftBrushColor = new GradientStop();
+        GradientStop leftBrushBlack = new GradientStop();
+        LinearGradientBrush rightBrush = new LinearGradientBrush();
+        GradientStop rightBrushColor = new GradientStop();
+        GradientStop rightBrushBlack = new GradientStop();
+        LinearGradientBrush bottomBrush = new LinearGradientBrush();
+        GradientStop bottomBrushColor = new GradientStop();
+        GradientStop bottomBrushBlack = new GradientStop();
+        RadialGradientBrush topLeft = new RadialGradientBrush();
+        GradientStop topLeftColor = new GradientStop();
+        GradientStop topLeftBlack= new GradientStop();
+        RadialGradientBrush topRight = new RadialGradientBrush();
+        GradientStop topRightColor= new GradientStop();
+        GradientStop topRightBlack= new GradientStop();
+        RadialGradientBrush bottomLeft = new RadialGradientBrush();
+        GradientStop bottomLeftColor= new GradientStop();
+        GradientStop bottomLeftBlack= new GradientStop();
+        RadialGradientBrush bottomRight = new RadialGradientBrush();
+        GradientStop bottomRightColor= new GradientStop();
+        GradientStop bottomRightBlack= new GradientStop();
+
+        public void CreateBrushes()
+        {
+            topBrush.StartPoint = new Point(0, 1);
+            topBrush.EndPoint = new Point(0, 0);
+            topBrushColor.Color = Color.FromRgb(255, 0, 0);
+            topBrushColor.Offset = 0.0;
+            topBrushBlack.Color = Colors.Black;
+            topBrushBlack.Offset = 1.0;
+            topBrush.GradientStops.Add(topBrushColor);
+            topBrush.GradientStops.Add(topBrushBlack);
+            // add all the other directional brushes to this list
         }
     }
 }
