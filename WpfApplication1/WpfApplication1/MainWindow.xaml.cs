@@ -44,7 +44,6 @@ namespace WpfApplication1
             blue = Convert.ToByte(blueMax);
             updateBrush.Color = Color.FromRgb(red, green, blue);
             solidBrush.Color = Color.FromRgb(red, green, blue);
-            rectColor.Fill = updateBrush;
             counter = 100;
             rectOuter.Fill = solidBrush;
             textValRed.Text = Convert.ToString(red);
@@ -67,7 +66,7 @@ namespace WpfApplication1
             string[] choiceSplit = fromcbx.Split(':');
             fromcbx = choiceSplit[1].Substring(1);
             
-            if(fromcbx == "Breathing")
+            if(fromcbx == "Solid Breathing")
             {
                 OpenColor();
                 InitializeTimer();
@@ -76,7 +75,7 @@ namespace WpfApplication1
                 slider.Visibility = Visibility.Visible;
                 labelSpeed.Visibility = Visibility.Visible;
             }
-            else if(fromcbx == "Rainbow")
+            else if(fromcbx == "Solid Rainbow")
             {
                 CloseColor();
                 InitializeTimer();
@@ -94,7 +93,8 @@ namespace WpfApplication1
                 slider.Visibility = Visibility.Hidden;
                 labelSpeed.Visibility = Visibility.Hidden;
                 updateBrush.Color = solidBrush.Color;
-                rectColor.Fill = updateBrush;
+                UpdateColor(red, green, blue);
+                FillRectangle();
             }
         }
 
@@ -145,9 +145,9 @@ namespace WpfApplication1
             greenMax = Convert.ToDouble(textValGreen.Text);
             blueMax = Convert.ToDouble(textValBlue.Text);
             counter = 100;
+            UpdateColor(red, green, blue);
+            FillRectangle();
             updateBrush.Color = solidBrush.Color;
-            topBrushColor.Color = Color.FromRgb(red, green, blue);
-            rectTop.Fill = topBrush;
         }
 
         bool goingUp = true;
@@ -177,8 +177,9 @@ namespace WpfApplication1
                 byte red = Convert.ToByte(counter * (redMax / 100));
                 byte green = Convert.ToByte(counter * (greenMax / 100));
                 byte blue = Convert.ToByte(counter * (blueMax / 100));
+                UpdateColor(red, green, blue);
+                FillRectangle();
                 updateBrush.Color = Color.FromRgb(red, green, blue);
-                rectColor.Fill = updateBrush;
             }
 
             else if (comboBox.SelectedIndex == 2)
@@ -208,15 +209,15 @@ namespace WpfApplication1
                 {
                     bowBlue = (byte)(bowBlue - 5);
                 }
+                UpdateColor(bowRed, bowGreen, bowBlue);
+                FillRectangle();
                 updateBrush.Color = Color.FromRgb(bowRed, bowGreen, bowBlue);
-                rectColor.Fill = updateBrush;
             }
         }
 
         private void StopTimer()
         {
             Timer1.Stop();
-            rectColor.Fill = solidBrush;
         }
         private void NumberValidation(object sender, TextCompositionEventArgs e)
         {
@@ -267,30 +268,81 @@ namespace WpfApplication1
         LinearGradientBrush bottomBrush = new LinearGradientBrush();
         GradientStop bottomBrushColor = new GradientStop();
         GradientStop bottomBrushBlack = new GradientStop();
-        RadialGradientBrush topLeft = new RadialGradientBrush();
-        GradientStop topLeftColor = new GradientStop();
-        GradientStop topLeftBlack= new GradientStop();
-        RadialGradientBrush topRight = new RadialGradientBrush();
-        GradientStop topRightColor= new GradientStop();
-        GradientStop topRightBlack= new GradientStop();
-        RadialGradientBrush bottomLeft = new RadialGradientBrush();
-        GradientStop bottomLeftColor= new GradientStop();
-        GradientStop bottomLeftBlack= new GradientStop();
-        RadialGradientBrush bottomRight = new RadialGradientBrush();
-        GradientStop bottomRightColor= new GradientStop();
-        GradientStop bottomRightBlack= new GradientStop();
+        RadialGradientBrush cornerBrush = new RadialGradientBrush();
+        GradientStop cornerBrushColor = new GradientStop();
+        GradientStop cornerBrushBlack = new GradientStop();
 
         public void CreateBrushes()
         {
+            // Top Rectangle Brush
             topBrush.StartPoint = new Point(0, 1);
             topBrush.EndPoint = new Point(0, 0);
-            topBrushColor.Color = Color.FromRgb(255, 0, 0);
+            topBrushColor.Color = Color.FromRgb(255, 255, 255);
             topBrushColor.Offset = 0.0;
             topBrushBlack.Color = Colors.Black;
             topBrushBlack.Offset = 1.0;
             topBrush.GradientStops.Add(topBrushColor);
             topBrush.GradientStops.Add(topBrushBlack);
-            // add all the other directional brushes to this list
+
+            // Left Rectangle Brush
+            leftBrush.StartPoint = new Point(1, 0);
+            leftBrush.EndPoint = new Point(0, 0);
+            leftBrushColor.Color = Color.FromRgb(255, 255, 255);
+            leftBrushColor.Offset = 0.0;
+            leftBrushBlack.Color = Colors.Black;
+            leftBrushBlack.Offset = 1.0;
+            leftBrush.GradientStops.Add(leftBrushColor);
+            leftBrush.GradientStops.Add(leftBrushBlack);
+
+            // Bottom Rectangle Brush
+            bottomBrush.StartPoint = new Point(0, 0);
+            bottomBrush.EndPoint = new Point(0, 1);
+            bottomBrushColor.Color = Color.FromRgb(255, 255, 255);
+            bottomBrushColor.Offset = 0.0;
+            bottomBrushBlack.Color = Colors.Black;
+            bottomBrushBlack.Offset = 1.0;
+            bottomBrush.GradientStops.Add(bottomBrushColor);
+            bottomBrush.GradientStops.Add(bottomBrushBlack);
+
+            // Right Rectangle Brush
+            rightBrush.StartPoint = new Point(0, 0);
+            rightBrush.EndPoint = new Point(1, 0);
+            rightBrushColor.Color = Color.FromRgb(255, 255, 255);
+            rightBrushColor.Offset = 0.0;
+            rightBrushBlack.Color = Colors.Black;
+            rightBrushBlack.Offset = 1.0;
+            rightBrush.GradientStops.Add(rightBrushColor);
+            rightBrush.GradientStops.Add(rightBrushBlack);
+
+            // Corner Brush
+            cornerBrush.GradientOrigin = new Point(0.5, 0.5);
+            cornerBrushColor.Color = Color.FromRgb(255, 255, 255);
+            cornerBrushColor.Offset = 0.0;
+            cornerBrushBlack.Color = Colors.Black;
+            cornerBrushBlack.Offset = 1.0;
+            cornerBrush.GradientStops.Add(cornerBrushColor);
+            cornerBrush.GradientStops.Add(cornerBrushBlack);
+        }
+
+        private void UpdateColor(byte red, byte green, byte blue)
+        {
+            topBrushColor.Color = Color.FromRgb(red, green, blue);
+            leftBrushColor.Color = Color.FromRgb(red, green, blue);
+            rightBrushColor.Color = Color.FromRgb(red, green, blue);
+            bottomBrushColor.Color = Color.FromRgb(red, green, blue);
+            cornerBrushColor.Color = Color.FromRgb(red, green, blue);
+        }
+
+        private void FillRectangle()
+        {
+            rectTop.Fill = topBrush;
+            rectLeft.Fill = leftBrush;
+            rectRight.Fill = rightBrush;
+            rectBottom.Fill = bottomBrush;
+            ellTopLeft.Fill = cornerBrush;
+            ellTopRight.Fill = cornerBrush;
+            ellBottomLeft.Fill = cornerBrush;
+            ellBottomRight.Fill = cornerBrush;
         }
     }
 }

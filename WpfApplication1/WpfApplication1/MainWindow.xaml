@@ -10,26 +10,13 @@
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
         </Grid.ColumnDefinitions>
-        <Grid.Resources>
-            <Color x:Key="inside">White</Color>
-            <GradientStopCollection x:Key="stops">
-                <GradientStop Color="Black" Offset="1"/>
-                <GradientStop Color="{DynamicResource inside}" Offset="0"/>
-            </GradientStopCollection>
-            <RadialGradientBrush x:Key="cornerBrush" GradientStops="{StaticResource stops}"/>
-            <LinearGradientBrush x:Key="topBrush" StartPoint="0,1" EndPoint="0,0" GradientStops="{DynamicResource stops}"/>
-            <LinearGradientBrush x:Key="leftBrush" StartPoint="1,0" EndPoint="0,0" GradientStops="{StaticResource stops}"/>
-            <LinearGradientBrush x:Key="rightBrush" StartPoint="0,0" EndPoint="1,0" GradientStops="{StaticResource stops}"/>
-            <LinearGradientBrush x:Key="bottomBrush" StartPoint="0,0" EndPoint="0,1" GradientStops="{StaticResource stops}"/>
-        </Grid.Resources>
         <ComboBox x:Name="comboBox" HorizontalAlignment="Left" Margin="721,72,0,0" VerticalAlignment="Top" Width="178" SelectionChanged="comboBox_SelectionChanged">
             <ComboBoxItem Name="cbi1">Solid</ComboBoxItem>
-            <ComboBoxItem Name="cbi2">Breathing</ComboBoxItem>
-            <ComboBoxItem Name="cbi3">Rainbow</ComboBoxItem>
+            <ComboBoxItem Name="cbi2">Solid Breathing</ComboBoxItem>
+            <ComboBoxItem Name="cbi3">Solid Rainbow</ComboBoxItem>
         </ComboBox>
         <Label x:Name="label" Content="Preset Effects" HorizontalAlignment="Left" Margin="770,45,0,0" VerticalAlignment="Top" Width="81"/>
         <Label x:Name="label1" Content="Color Representation" HorizontalAlignment="Left" Margin="721,275,0,0" VerticalAlignment="Top"/>
-        <Rectangle x:Name="rectColor" Fill="Black" HorizontalAlignment="Left" Height="140" Margin="508,250,0,0" Stroke="Black" VerticalAlignment="Top" Width="198" StrokeThickness="0"/>
         <Slider x:Name="slider" HorizontalAlignment="Left" Margin="125,114,0,0" VerticalAlignment="Top" Width="252" Maximum="100" Minimum="1" SmallChange="1" LargeChange="0" ValueChanged="slider_ValueChanged"/>
         <Label x:Name="labelSpeed" Content="Speed" HorizontalAlignment="Left" Margin="228,88,0,0" VerticalAlignment="Top" RenderTransformOrigin="1.072,0.342"/>
         <Rectangle x:Name="rectOuter" Fill="Black" HorizontalAlignment="Left" Height="336" Margin="75,175,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="361" />
@@ -45,14 +32,14 @@
         <Slider x:Name="sliderGreen" HorizontalAlignment="Left" Margin="177,323,0,0" VerticalAlignment="Top" Height="23" Width="221" Maximum="255" SmallChange="1" LargeChange="0" Value="{Binding ElementName=textValGreen, Path=Text}" IsSnapToTickEnabled="True"/>
         <Slider x:Name="sliderBlue" HorizontalAlignment="Left" Margin="177,374,0,0" VerticalAlignment="Top" Height="23" Width="221" Maximum="255" SmallChange="1" LargeChange="0" Value="{Binding ElementName=textValBlue, Path=Text}" IsSnapToTickEnabled="True"/>
         <Rectangle Fill="Black" HorizontalAlignment="Left" Height="214" Margin="634,297,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="291"/>
-        <Ellipse x:Name="ellTopLeft" Fill="{StaticResource cornerBrush}" HorizontalAlignment="Left" Height="70" Margin="671,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
-        <Ellipse x:Name="ellTopRight" Fill="{StaticResource cornerBrush}" HorizontalAlignment="Left" Height="70" Margin="823,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
-        <Ellipse x:Name="ellBottomLeft" Fill="{StaticResource cornerBrush}" HorizontalAlignment="Left" Height="70" Margin="671,420,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
-        <Ellipse x:Name="ellBottomRight" Fill="{StaticResource cornerBrush}" HorizontalAlignment="Left" Height="70" Margin="823,420,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
-        <Rectangle x:Name="rectLeft" Fill="{StaticResource leftBrush}" HorizontalAlignment="Left" Height="100" Margin="671,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="35"/>
-        <Rectangle x:Name="rectRight" Fill="{StaticResource rightBrush}" HorizontalAlignment="Left" Height="100" Margin="858,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="35"/>
-        <Rectangle x:Name="rectBottom" Fill="{StaticResource bottomBrush}" HorizontalAlignment="Left" Height="35" Margin="706,455,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
-        <Rectangle x:Name="rectTop" Fill="{DynamicResource topBrush}" HorizontalAlignment="Left" Height="35" Margin="706,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
+        <Ellipse x:Name="ellTopLeft" Fill="Black" HorizontalAlignment="Left" Height="70" Margin="671,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
+        <Ellipse x:Name="ellTopRight" Fill="Black" HorizontalAlignment="Left" Height="70" Margin="823,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
+        <Ellipse x:Name="ellBottomLeft" Fill="Black" HorizontalAlignment="Left" Height="70" Margin="671,420,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
+        <Ellipse x:Name="ellBottomRight" Fill="Black" HorizontalAlignment="Left" Height="70" Margin="823,420,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="70"/>
+        <Rectangle x:Name="rectLeft" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="671,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="35"/>
+        <Rectangle x:Name="rectRight" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="858,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="35"/>
+        <Rectangle x:Name="rectBottom" Fill="Black" HorizontalAlignment="Left" Height="35" Margin="706,455,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
+        <Rectangle x:Name="rectTop" Fill="Black" HorizontalAlignment="Left" Height="35" Margin="706,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
         <Rectangle x:Name="rectCenter" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="706,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
         
 
