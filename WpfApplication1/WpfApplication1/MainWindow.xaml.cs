@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO.Ports;
 
 namespace WpfApplication1
 {
@@ -24,11 +25,29 @@ namespace WpfApplication1
         SolidColorBrush updateBrush = new SolidColorBrush();
         SolidColorBrush solidBrush = new SolidColorBrush();
         System.Windows.Threading.DispatcherTimer Timer1 = new System.Windows.Threading.DispatcherTimer();
-        System.Timers.Timer Timer2 = new System.Timers.Timer();
         byte red, green, blue;
         double redMax, greenMax, blueMax;
         int counter;
         byte bowRed, bowBlue, bowGreen;
+        SerialPort sp = new SerialPort();
+        //string buffer { get; set; }
+        LinearGradientBrush topBrush = new LinearGradientBrush();
+        GradientStop topBrushColor = new GradientStop();
+        GradientStop topBrushBlack = new GradientStop();
+        LinearGradientBrush leftBrush = new LinearGradientBrush();
+        GradientStop leftBrushColor = new GradientStop();
+        GradientStop leftBrushBlack = new GradientStop();
+        LinearGradientBrush rightBrush = new LinearGradientBrush();
+        GradientStop rightBrushColor = new GradientStop();
+        GradientStop rightBrushBlack = new GradientStop();
+        LinearGradientBrush bottomBrush = new LinearGradientBrush();
+        GradientStop bottomBrushColor = new GradientStop();
+        GradientStop bottomBrushBlack = new GradientStop();
+        RadialGradientBrush cornerBrush = new RadialGradientBrush();
+        GradientStop cornerBrushColor = new GradientStop();
+        GradientStop cornerBrushBlack = new GradientStop();
+        //private bool connected;
+        //private string connectedPort;
 
         public MainWindow()
         {
@@ -255,23 +274,6 @@ namespace WpfApplication1
             sliderBlue.Visibility = Visibility.Visible;
         }
 
-
-        LinearGradientBrush topBrush = new LinearGradientBrush();
-        GradientStop topBrushColor = new GradientStop();
-        GradientStop topBrushBlack = new GradientStop();
-        LinearGradientBrush leftBrush = new LinearGradientBrush();
-        GradientStop leftBrushColor = new GradientStop();
-        GradientStop leftBrushBlack = new GradientStop();
-        LinearGradientBrush rightBrush = new LinearGradientBrush();
-        GradientStop rightBrushColor = new GradientStop();
-        GradientStop rightBrushBlack = new GradientStop();
-        LinearGradientBrush bottomBrush = new LinearGradientBrush();
-        GradientStop bottomBrushColor = new GradientStop();
-        GradientStop bottomBrushBlack = new GradientStop();
-        RadialGradientBrush cornerBrush = new RadialGradientBrush();
-        GradientStop cornerBrushColor = new GradientStop();
-        GradientStop cornerBrushBlack = new GradientStop();
-
         public void CreateBrushes()
         {
             // Top Rectangle Brush
@@ -343,6 +345,52 @@ namespace WpfApplication1
             ellTopRight.Fill = cornerBrush;
             ellBottomLeft.Fill = cornerBrush;
             ellBottomRight.Fill = cornerBrush;
+        }
+
+        private Queue<byte> receivedData = new Queue<byte>();
+        //TESTING AREA FOR ARDUINO INTEGRATION
+        private void CONNECT_Click(object sender, RoutedEventArgs e)
+        {
+            //buffer = "";
+            //connected = false;
+            try
+            {
+                sp.PortName = "COM3";
+                sp.ReadTimeout = 500;
+                sp.BaudRate = 9600;
+                sp.DataReceived += new SerialDataReceivedEventHandler(dataReceived);
+                sp.Open();
+                sp.Write("HEY~");
+            }
+            catch(Exception)
+            {
+                MessageBox.Show("ERROR");
+            }
+            //if (connected == true)
+            //{
+            //    CONNECT.Visibility = Visibility.Hidden;
+            //    labelStatus.Content = "Connected";
+            //} 
+        }
+
+        private void ON_Click(object sender, RoutedEventArgs e)
+        {
+            sp.Write("1~");
+        }
+
+        private void OFF_Click(object sender, RoutedEventArgs e)
+        {
+            sp.Write("0~");
+        }
+
+        private void dataReceived(object sender, SerialDataReceivedEventArgs e)
+        {
+            //buffer += sp.ReadExisting();
+            //if(buffer.Contains("84652345shae"))
+            //{
+                //connected = true;
+                //connectedPort = sp.PortName;
+            //}
         }
     }
 }

@@ -41,8 +41,11 @@
         <Rectangle x:Name="rectBottom" Fill="Black" HorizontalAlignment="Left" Height="35" Margin="706,455,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
         <Rectangle x:Name="rectTop" Fill="Black" HorizontalAlignment="Left" Height="35" Margin="706,320,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
         <Rectangle x:Name="rectCenter" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="706,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
-        
-
-
+        <Button x:Name="ON" Content="ON" HorizontalAlignment="Left" Margin="549,175,0,0" VerticalAlignment="Top" Width="75" Click="ON_Click"/>
+        <Button x:Name="OFF" Content="OFF" HorizontalAlignment="Left" Margin="634,175,0,0" VerticalAlignment="Top" Width="75" Click="OFF_Click"/>
+        <Button x:Name="CONNECT" Content="CONNECT" HorizontalAlignment="Left" Margin="549,200,0,0" VerticalAlignment="Top" Width="75" Click="CONNECT_Click"/>
+        <TextBox x:Name="textPort" HorizontalAlignment="Left" Height="23" Margin="634,147,0,0" TextWrapping="Wrap" Text="COM3" VerticalAlignment="Top" Width="75"/>
+        <Label x:Name="labelVer" Content="ver 1.0.0" HorizontalAlignment="Right" Margin="887,516,0,0" VerticalAlignment="Top" Width="95"/>
+        <Label x:Name="labelStatus" Content="Disconnected" HorizontalAlignment="Right" Margin="887,533,0,0" VerticalAlignment="Top" Width="95"/>
     </Grid>
 </Window>
