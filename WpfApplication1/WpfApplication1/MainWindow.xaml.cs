@@ -30,7 +30,7 @@ namespace WpfApplication1
         int counter;
         byte bowRed, bowBlue, bowGreen;
         SerialPort sp = new SerialPort();
-        //string buffer { get; set; }
+        string buffer { get; set; }
         LinearGradientBrush topBrush = new LinearGradientBrush();
         GradientStop topBrushColor = new GradientStop();
         GradientStop topBrushBlack = new GradientStop();
@@ -46,8 +46,7 @@ namespace WpfApplication1
         RadialGradientBrush cornerBrush = new RadialGradientBrush();
         GradientStop cornerBrushColor = new GradientStop();
         GradientStop cornerBrushBlack = new GradientStop();
-        //private bool connected;
-        //private string connectedPort;
+        private bool connected;
 
         public MainWindow()
         {
@@ -351,26 +350,14 @@ namespace WpfApplication1
         //TESTING AREA FOR ARDUINO INTEGRATION
         private void CONNECT_Click(object sender, RoutedEventArgs e)
         {
-            //buffer = "";
-            //connected = false;
-            try
-            {
-                sp.PortName = "COM3";
-                sp.ReadTimeout = 500;
-                sp.BaudRate = 9600;
-                sp.DataReceived += new SerialDataReceivedEventHandler(dataReceived);
-                sp.Open();
-                sp.Write("HEY~");
-            }
-            catch(Exception)
-            {
-                MessageBox.Show("ERROR");
-            }
-            //if (connected == true)
-            //{
-            //    CONNECT.Visibility = Visibility.Hidden;
-            //    labelStatus.Content = "Connected";
-            //} 
+            buffer = "";
+            connected = false;
+            sp.PortName = "COM3";
+            sp.ReadTimeout = 500;
+            sp.BaudRate = 9600;
+            sp.DataReceived += new SerialDataReceivedEventHandler(dataReceived);
+            sp.Open();
+            sp.Write("HEY~");
         }
 
         private void ON_Click(object sender, RoutedEventArgs e)
@@ -385,12 +372,11 @@ namespace WpfApplication1
 
         private void dataReceived(object sender, SerialDataReceivedEventArgs e)
         {
-            //buffer += sp.ReadExisting();
-            //if(buffer.Contains("84652345shae"))
-            //{
-                //connected = true;
-                //connectedPort = sp.PortName;
-            //}
+            buffer += sp.ReadExisting();
+            if(buffer.Contains("84652345shae"))
+            {
+                connected = true;
+            }
         }
     }
 }

@@ -299,21 +299,13 @@ namespace WpfApplication1 {
         
         #line 47 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
-        internal System.Windows.Controls.TextBox textPort;
-        
-        #line default
-        #line hidden
-        
-        
-        #line 48 "..\..\MainWindow.xaml"
-        [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label labelVer;
         
         #line default
         #line hidden
         
         
-        #line 49 "..\..\MainWindow.xaml"
+        #line 48 "..\..\MainWindow.xaml"
         [System.Diagnostics.CodeAnalysis.SuppressMessageAttribute("Microsoft.Performance", "CA1823:AvoidUnusedPrivateFields")]
         internal System.Windows.Controls.Label labelStatus;
         
@@ -519,12 +511,9 @@ namespace WpfApplication1 {
             #line hidden
             return;
             case 33:
-            this.textPort = ((System.Windows.Controls.TextBox)(target));
-            return;
-            case 34:
             this.labelVer = ((System.Windows.Controls.Label)(target));
             return;
-            case 35:
+            case 34:
             this.labelStatus = ((System.Windows.Controls.Label)(target));
             return;
             }
