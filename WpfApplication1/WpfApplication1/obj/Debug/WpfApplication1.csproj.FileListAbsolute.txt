@@ -12,3 +12,5 @@ C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\
 C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.csproj.GenerateResource.Cache
 C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.exe
 C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\WpfApplication1.pdb
+C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\ColorPicker.g.cs
+C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\obj\Debug\ColorPicker.baml
