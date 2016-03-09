@@ -80,35 +80,37 @@
             <Rectangle x:Name="rectR" Fill="Red" Height="96" Canvas.Left="857" Stroke="Black" StrokeThickness="0" Canvas.Top="357" Width="37"/>
             <Rectangle x:Name="rectGlow" Fill="Black" Height="170" Canvas.Left="672" Stroke="Black" StrokeThickness="0" Canvas.Top="320" Width="222">
                 <Rectangle.OpacityMask>
-                    <ImageBrush ImageSource="C:\Users\Iain\version-control\WPFTest\WpfApplication1\WpfApplication1\OpacityMaskInvvert.png"/>
+                    <ImageBrush ImageSource="OpacityMaskInvert.png"/>
                 </Rectangle.OpacityMask>
             </Rectangle>
             <Grid x:Name="colorButtons" Canvas.Top="216" Width="294" Height="274" Canvas.Left="110">
-                <Button x:Name="btnColor1" Content="1" Canvas.Left="472" Canvas.Top="98" Width="32" Height="32" Margin="20,8,242,234" Click="btnColor1_Click"/>
-                <Button x:Name="btnColor2" Content="2" Canvas.Left="509" Canvas.Top="98" Width="32" Height="32" Margin="57,8,205,234" Click="btnColor2_Click"/>
-                <Button x:Name="btnColor3" Content="3" Canvas.Left="546" Canvas.Top="98" Width="32" Height="32" Margin="94,8,168,234"/>
-                <Button x:Name="btnColor4" Content="4" Canvas.Left="583" Canvas.Top="98" Width="32" Height="32" Margin="131,8,131,234"/>
-                <Button x:Name="btnColor5" Content="5" HorizontalAlignment="Left" Margin="168,8,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor6" Content="6" HorizontalAlignment="Left" Margin="205,8,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor7" Content="7" HorizontalAlignment="Left" Margin="242,8,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor8" Content="8" HorizontalAlignment="Left" Margin="242,45,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor9" Content="9" HorizontalAlignment="Left" Margin="242,82,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor10" Content="10" HorizontalAlignment="Left" Margin="242,119,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor11"  Content="11" HorizontalAlignment="Left" Margin="242,156,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor12" Content="12" HorizontalAlignment="Left" Margin="242,193,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor13" Content="13" HorizontalAlignment="Left" Margin="242,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor14" Content="14" HorizontalAlignment="Left" Margin="205,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor15" Content="15" HorizontalAlignment="Left" Margin="168,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor16" Content="16" HorizontalAlignment="Left" Margin="131,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor17" Content="17" HorizontalAlignment="Left" Margin="94,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor18" Content="18" HorizontalAlignment="Left" Margin="57,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor19" Content="19" HorizontalAlignment="Left" Margin="20,230,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor20" Content="20" HorizontalAlignment="Left" Margin="20,193,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor21" Content="21" HorizontalAlignment="Left" Margin="20,156,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor22" Content="22" HorizontalAlignment="Left" Margin="20,119,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor23" Content="23" HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
-                <Button x:Name="btnColor24" Content="24" HorizontalAlignment="Left" Margin="20,45,0,0" VerticalAlignment="Top" Width="32" Height="32"/>
+                <Button x:Name="btnColor1" Content="1" Canvas.Left="472" Canvas.Top="98" Width="32" Height="32" Margin="20,8,242,234" Click="btnColor_Click"/>
+                <Button x:Name="btnColor2" Content="2" Canvas.Left="509" Canvas.Top="98" Width="32" Height="32" Margin="57,8,205,234" Click="btnColor_Click"/>
+                <Button x:Name="btnColor3" Content="3" Canvas.Left="546" Canvas.Top="98" Width="32" Height="32" Margin="94,8,168,234" Click="btnColor_Click"/>
+                <Button x:Name="btnColor4" Content="4" Canvas.Left="583" Canvas.Top="98" Width="32" Height="32" Margin="131,8,131,234" Click="btnColor_Click"/>
+                <Button x:Name="btnColor5" Content="5" HorizontalAlignment="Left" Margin="168,8,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor6" Content="6" HorizontalAlignment="Left" Margin="205,8,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor7" Content="7" HorizontalAlignment="Left" Margin="242,8,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor8" Content="8" HorizontalAlignment="Left" Margin="242,45,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor9" Content="9" HorizontalAlignment="Left" Margin="242,82,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor10" Content="10" HorizontalAlignment="Left" Margin="242,119,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor11" Content="11" HorizontalAlignment="Left" Margin="242,156,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor12" Content="12" HorizontalAlignment="Left" Margin="242,193,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor13" Content="13" HorizontalAlignment="Left" Margin="242,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor14" Content="14" HorizontalAlignment="Left" Margin="205,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor15" Content="15" HorizontalAlignment="Left" Margin="168,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor16" Content="16" HorizontalAlignment="Left" Margin="131,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor17" Content="17" HorizontalAlignment="Left" Margin="94,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor18" Content="18" HorizontalAlignment="Left" Margin="57,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor19" Content="19" HorizontalAlignment="Left" Margin="20,230,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor20" Content="20" HorizontalAlignment="Left" Margin="20,193,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor21" Content="21" HorizontalAlignment="Left" Margin="20,156,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor22" Content="22" HorizontalAlignment="Left" Margin="20,119,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor23" Content="23" HorizontalAlignment="Left" Margin="20,82,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
+                <Button x:Name="btnColor24" Content="24" HorizontalAlignment="Left" Margin="20,45,0,0" VerticalAlignment="Top" Width="32" Height="32" Click="btnColor_Click"/>
             </Grid>
+            <Button x:Name="buttonReset" Content="Reset" Canvas.Left="187" Canvas.Top="275" Width="146" Click="buttonReset_Click" Height="30"/>
+            <Button x:Name="btnDirection" Content="Reverse" Canvas.Left="187" Canvas.Top="320" Width="146" Height="30" Click="btnDirection_Click"/>
         </Canvas>
         <Rectangle x:Name="rectCenter" Fill="Black" HorizontalAlignment="Left" Height="100" Margin="706,355,0,0" Stroke="Black" StrokeThickness="0" VerticalAlignment="Top" Width="152"/>
         <TextBlock x:Name="textStatus" HorizontalAlignment="Left" Margin="859,74,0,0" TextWrapping="Wrap" Text="Waiting..." TextAlignment="Right" VerticalAlignment="Top" Width="123" Grid.Row="1" Grid.RowSpan="2"/>

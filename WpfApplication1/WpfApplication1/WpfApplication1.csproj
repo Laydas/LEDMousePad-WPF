@@ -103,10 +103,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="OpacityMask.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Resource Include="OpacityMaskInvvert.png" />
+    <Resource Include="OpacityMaskInvert.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="colorChart.PNG" />

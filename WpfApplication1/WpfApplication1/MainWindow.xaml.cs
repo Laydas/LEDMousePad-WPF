@@ -44,8 +44,20 @@ namespace WpfApplication1
         GradientStop stopBL1, stopBL2;
         public Color sendColor;
         GradientStop stopL1, stopL2, stopL3, stopL4, stopL5, stopL6;
-        bool output;
 
+        private void btnDirection_Click(object sender, RoutedEventArgs e)
+        {
+            if(rI == 1)
+            {
+                rI = -1;
+            }
+            else
+            {
+                rI = 1;
+            }
+        }
+
+        Color newColor;
         Color[] points = new Color[24];
         Color[] staticPoints = new Color[24];
         SolidColorBrush[] buttonBrush = new SolidColorBrush[24];
@@ -53,6 +65,7 @@ namespace WpfApplication1
         int[,] range = new int[24, 3];
         float[,] step = new float[24, 3];
         float[,] current = new float[24, 3];
+        int rI = 1;
 
         public MainWindow()
         {
@@ -81,8 +94,6 @@ namespace WpfApplication1
             WaitConnect();
             padColor = "12025550";
             createBrushes();
-            output = false;
-
         }
 
         private void colorRects()
@@ -97,24 +108,45 @@ namespace WpfApplication1
             rectL.Fill = brushL;
         }
 
+        private void buttonReset_Click(object sender, RoutedEventArgs e)
+        {
+            createBrushes();
+            int count = 0;
+            foreach (var childButton in colorButtons.Children.OfType<Button>())
+            {
+                childButton.Background = buttonBrush[count];
+                count++;
+            }
+        }
+
         private void openCP(string name)
         {
-            int i = Convert.ToInt32(name.Substring(8));
+            int i = Convert.ToInt32(name);
             sendColor = staticPoints[i - 1];
             var dialog = new ColorPicker(sendColor);
             dialog.Top = this.Top + (this.Height / 2) - (dialog.Height / 2);
             dialog.Left = this.Left + (this.Width / 2) - (dialog.Width / 2);
-            dialog.ShowDialog();
-        }
-        private void btnColor1_Click(object sender, RoutedEventArgs e)
-        {
-            openCP(btnColor1.Name);
+            if(dialog.ShowDialog() == true)
+            {
+                newColor = dialog.NewColor;
+            }
+            if (newColor.R == 0 && newColor.G == 0 & newColor.B == 0)
+            {
+                newColor = staticPoints[i - 1];
+            }
+            else
+            {
+                staticPoints[i - 1] = newColor;
+            }
         }
 
-        private void btnColor2_Click(object sender, RoutedEventArgs e)
+        private void btnColor_Click(object sender, RoutedEventArgs e)
         {
-            openCP(btnColor2.Name);
+            string content = (sender as Button).Content.ToString();
+            openCP(content);
+            (sender as Button).Background = new SolidColorBrush(newColor);
         }
+
 
         private void createBrushes()
         {
@@ -413,6 +445,8 @@ namespace WpfApplication1
                 childButton.Background = buttonBrush[count];
                 count++;
             }
+            btnDirection.Visibility = Visibility.Visible;
+            buttonReset.Visibility = Visibility.Visible;
         }
 
         private void closeColorButtons()
@@ -421,6 +455,8 @@ namespace WpfApplication1
             {
                 childButton.Visibility = Visibility.Hidden;
             }
+            btnDirection.Visibility = Visibility.Hidden;
+            buttonReset.Visibility = Visibility.Hidden;
         }
 
         private void slider_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
@@ -488,7 +524,7 @@ namespace WpfApplication1
         }
 
         bool goingUp = true;
-
+        
         private void Timer1_Tick(object sender, EventArgs e)
         {
             if (comboBox.SelectedIndex == 1)
@@ -556,11 +592,14 @@ namespace WpfApplication1
                 {
                     for (int i = 0; i < 24; i++)
                     {
-                        now[i, 0] = staticPoints[(((i + 1) % 24) + place) % 24].R;
-                        now[i, 1] = staticPoints[(((i + 1) % 24) + place) % 24].G;
-                        now[i, 2] = staticPoints[(((i + 1) % 24) + place) % 24].B;
+                        int j = i + 1 * rI;
+                        if (j < 0) { j = 23; }
+                        now[i, 0] = staticPoints[(((j) % 24) + place) % 24].R;
+                        now[i, 1] = staticPoints[(((j) % 24) + place) % 24].G;
+                        now[i, 2] = staticPoints[(((j) % 24) + place) % 24].B;
                     }
-                    place++;
+                    place = place + 1 * rI;
+                    if(place < 0) { place = 23; }
                     place = place % 24;
                     count = 0;
                 }
@@ -569,11 +608,13 @@ namespace WpfApplication1
                 {
                     for (int i = 0; i < 24; i++)
                     {
-                        int range = (int)(now[(i + 1) % 24, 0] - now[i, 0]);
+                        int j = i + 1 * rI;
+                        if(j < 0) { j = 23; }
+                        int range = (int)(now[(j) % 24, 0] - now[i, 0]);
                         step[i, 0] = range / 25.0f;
-                        range = (int)(now[(i + 1) % 24, 1] - now[i, 1]);
+                        range = (int)(now[(j) % 24, 1] - now[i, 1]);
                         step[i, 1] = range / 25.0f;
-                        range = (int)(now[(i + 1) % 24, 2] - now[i, 2]);
+                        range = (int)(now[(j) % 24, 2] - now[i, 2]);
                         step[i, 2] = range / 25.0f;
                         current[i, 0] = now[i, 0];
                         current[i, 1] = now[i, 1];

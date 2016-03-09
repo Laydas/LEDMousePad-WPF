@@ -23,6 +23,8 @@ namespace WpfApplication1
         GradientStop stopTop = new GradientStop();
         GradientStop stopMed = new GradientStop();
         GradientStop stopBot = new GradientStop();
+        private byte[] pixels;
+        public Color returnColor = new Color();
 
         public ColorPicker(Color currentColor)
         {
@@ -38,27 +40,46 @@ namespace WpfApplication1
             gradient.GradientStops.Add(stopTop);
             gradient.GradientStops.Add(stopMed);
             gradient.GradientStops.Add(stopBot);
-
             rectCPCurrent.Fill = new SolidColorBrush(currentColor);
             rectCPGradient.Fill = gradient;
-
-            byte blue, green, red;
-            
         }
 
         private void image_Click(object sender, RoutedEventArgs e)
         {
-            textBlock.Text = Convert.ToString(Mouse.GetPosition(btnColor));
+            try
+            {
+                int x = Convert.ToInt32(Mouse.GetPosition(btnColor).X);
+                int y = Convert.ToInt32(Mouse.GetPosition(btnColor).Y);
+                CroppedBitmap cb = new CroppedBitmap(btnPick.Source as BitmapSource, new Int32Rect(x, y, 1, 1));
+                pixels = new byte[4];
+                try
+                {
+                    cb.CopyPixels(pixels, 4, 0);
+                    returnColor = Color.FromRgb(pixels[2], pixels[1], pixels[0]);
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                }
+                rectCPCurrent.Fill = new SolidColorBrush(returnColor);
+                stopMed.Color = returnColor;
+            }
+            catch (Exception exc) { }
         }
 
         private void cpAccept_Click(object sender, RoutedEventArgs e)
         {
-
+            DialogResult = true;
         }
 
         private void cpCancel_Click(object sender, RoutedEventArgs e)
         {
 
+        }
+
+        public Color NewColor
+        {
+            get { return returnColor;  }
         }
 
     }
