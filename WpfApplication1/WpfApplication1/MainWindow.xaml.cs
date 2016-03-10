@@ -366,22 +366,6 @@ namespace WpfApplication1
             brushL.GradientStops.Add(stopL6);
         }
 
-        public async void WaitConnect()
-        {
-            await Task.Delay(1000);
-            if(connected == true)
-            {
-                sp.Close();
-                textStatus.Text = "Connected: " + sp.PortName;
-                buttonToPad.IsEnabled = true;
-            }
-            else
-            {
-                ConnectSerial();
-                WaitConnect();
-            }
-        }
-
         private void comboBox_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
             string fromcbx = comboBox.SelectedValue.ToString();
@@ -763,16 +747,36 @@ namespace WpfApplication1
         private void ConnectSerial()
         {
             buffer = "";
-            if (!consecutiveAttempt)
+            string[] ports = SerialPort.GetPortNames();
+            foreach (string port in ports)
             {
-                sp.PortName = "COM3";
-                sp.ReadTimeout = 500;
-                sp.BaudRate = 9600;
-                sp.DataReceived += new SerialDataReceivedEventHandler(dataConnect);
-                sp.Open();
+                if (!consecutiveAttempt)
+                {
+                    sp.PortName = port;
+                    sp.ReadTimeout = 500;
+                    sp.BaudRate = 9600;
+                    sp.DataReceived += new SerialDataReceivedEventHandler(dataConnect);
+                    sp.Open();
+                }
+                consecutiveAttempt = true;
+                sp.Write("HEY~");
             }
-            consecutiveAttempt = true;
-            sp.Write("HEY~");
+        }
+
+        public async void WaitConnect()
+        {
+            await Task.Delay(1000);
+            if (connected == true)
+            {
+                sp.Close();
+                textStatus.Text = "Connected: " + sp.PortName;
+                buttonToPad.IsEnabled = true;
+            }
+            else
+            {
+                ConnectSerial();
+                WaitConnect();
+            }
         }
 
         private string CreateMousePadColorString()
