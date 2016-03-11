@@ -92,7 +92,7 @@ namespace WpfApplication1
             connected = false;
             ConnectSerial();
             WaitConnect();
-            padColor = "12025550";
+            padColor = "120255050";
             createBrushes();
         }
 
@@ -500,9 +500,11 @@ namespace WpfApplication1
         {
             sp.Open();
             toPadString = padMode;
+            sp.Write(toPadString);
             toPadString += padColor;
             toPadString += CreateMousePadSliderSpeed();
-            sp.Write(toPadString);
+            toPadString += "~";
+            sp.Write("0SR~");
             sp.Close();
             MessageBox.Show(toPadString);
         }
